@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  resources :other_rooms
-  resources :photos
-  resources :furnishings
-  resources :amenities
   resources :profiles
   resources :properties
   

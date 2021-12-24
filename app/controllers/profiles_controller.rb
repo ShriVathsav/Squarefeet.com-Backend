@@ -10,7 +10,6 @@ class ProfilesController < ApplicationController
 
   # GET /profiles/1
   def show
-    puts @profile.properties.inspect
     render json: @profile
   end
 

@@ -10,46 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_21_134614) do
+ActiveRecord::Schema.define(version: 2021_12_24_061140) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "amenities", force: :cascade do |t|
-    t.integer "name", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.bigint "property_id"
-    t.index ["property_id"], name: "index_amenities_on_property_id"
-  end
-
-  create_table "furnishings", force: :cascade do |t|
-    t.integer "name", null: false
-    t.integer "quantity", null: false
-    t.boolean "active", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.bigint "property_id"
-    t.index ["property_id"], name: "index_furnishings_on_property_id"
-  end
-
-  create_table "other_rooms", force: :cascade do |t|
-    t.integer "name", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.bigint "property_id"
-    t.index ["property_id"], name: "index_other_rooms_on_property_id"
-  end
-
-  create_table "photos", force: :cascade do |t|
-    t.string "path", default: "", null: false
-    t.string "tag", default: "", null: false
-    t.boolean "cover_photo", default: false, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.bigint "property_id"
-    t.index ["property_id"], name: "index_photos_on_property_id"
-  end
 
   create_table "profiles", force: :cascade do |t|
     t.string "first_name"
@@ -143,9 +107,5 @@ ActiveRecord::Schema.define(version: 2021_12_21_134614) do
     t.index ["profile_id"], name: "index_properties_on_profile_id"
   end
 
-  add_foreign_key "amenities", "properties"
-  add_foreign_key "furnishings", "properties"
-  add_foreign_key "other_rooms", "properties"
-  add_foreign_key "photos", "properties"
   add_foreign_key "properties", "profiles"
 end

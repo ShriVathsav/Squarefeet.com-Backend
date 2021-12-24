@@ -83,12 +83,17 @@ sql7 = "select * from properties"
   end
 
   # GET /properties/1
-  def show
+  def shows
     prop = Property.find(params[:id])
     merged  = [prop.as_json, {:amenities => prop.amenities.as_json}, {:furnishings => prop.furnishings.as_json},
                   {:other_rooms => prop.other_rooms.as_json}, {:photos => prop.photos.as_json}]
     propertyCombined = merged.inject(&:merge)
     render json: propertyCombined
+  end
+  
+  # GET /properties/1
+  def show
+    render json: @property
   end
 
   # POST /propertiess
