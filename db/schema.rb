@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_10_195019) do
+ActiveRecord::Schema.define(version: 2021_12_21_134614) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,7 +68,7 @@ ActiveRecord::Schema.define(version: 2020_11_10_195019) do
 
   create_table "properties", force: :cascade do |t|
     t.string "property_type", default: "", null: false
-    t.integer "sub_property_type"
+    t.string "sub_property_type"
     t.string "poster_designation", default: "", null: false
     t.string "list_property_for", default: "", null: false
     t.string "location"
@@ -87,8 +87,8 @@ ActiveRecord::Schema.define(version: 2020_11_10_195019) do
     t.integer "bathrooms"
     t.integer "balconies"
     t.string "furnishing"
-    t.integer "total_floors"
-    t.integer "property_on_floor"
+    t.string "total_floors"
+    t.string "property_on_floor"
     t.integer "floors_allowed_for_construction"
     t.integer "number_of_flats"
     t.boolean "presence_of_elevator", default: false
@@ -135,6 +135,11 @@ ActiveRecord::Schema.define(version: 2020_11_10_195019) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "profile_id"
+    t.string "photos_list"
+    t.string "amenities_list"
+    t.string "more_amenities_list"
+    t.string "other_rooms_list"
+    t.string "furnishings_list"
     t.index ["profile_id"], name: "index_properties_on_profile_id"
   end
 

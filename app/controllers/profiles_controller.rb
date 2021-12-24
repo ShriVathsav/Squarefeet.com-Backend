@@ -10,6 +10,7 @@ class ProfilesController < ApplicationController
 
   # GET /profiles/1
   def show
+    puts @profile.properties.inspect
     render json: @profile
   end
 
@@ -48,6 +49,16 @@ class ProfilesController < ApplicationController
   # DELETE /profiles/1
   def destroy
     @profile.destroy
+  end
+  
+  # GET /profiles/getProperties/1
+  def getProperties
+    params.permit!
+    puts params.inspect
+    puts params[:id]
+    @profile = Profile.find(params[:id])
+    puts @profile.properties
+    render json: @profile.properties
   end
 
   private

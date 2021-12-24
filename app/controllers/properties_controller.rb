@@ -4,23 +4,9 @@ class PropertiesController < ApplicationController
 
   # GET /properties
   def index
-    #props = Property.eager_load(:photos).select('photos.*')
-    puts "Hi"
-    puts params.permit!
-    puts params
-    puts "Hi2"
-    
     locality = "%" + (!!params[:locality] ? params[:locality] : "") + "%"
     city = "%" + (!!params[:city] ? params[:city] : "") + "%"
     list_property_for = (!!params[:type] ? params[:type] : "Sale")
-    puts
-    puts
-    puts city
-    puts
-    puts
-    puts locality
-    puts
-    puts
     props = []
     
     sql = "Select * from Properties WHERE city LIKE '#{city}' AND locality LIKE '#{locality}'"
@@ -61,14 +47,8 @@ sql7 = "select * from properties"
     sql2 = "SELECT * FROM Properties INNER JOIN Amenities ON Amenities.property_id=Properties.id"
     records_array = ActiveRecord::Base.connection.execute(sql3)
     
-    propd = Property.where("city = 'Kanchipuram'").where("locality = 'Periya'")
-    propc = Property.all
-    puts propd
-    
-    puts "city = '#{city}'"
-    
-    puts list_property_for
-    puts "HELO HELO HELO"
+    #propd = Property.where("city = 'Kanchipuram'").where("locality = 'Periya'")
+    #propc = Property.all
     
     mainQuery = ""
     strings = ""
@@ -111,8 +91,8 @@ sql7 = "select * from properties"
     render json: propertyCombined
   end
 
-  # POST /properties
-  def create
+  # POST /propertiess
+  def creates
     request_body = params.to_unsafe_h()
     ameneties_params = request_body["amenities"].class == NilClass ? [] : request_body["amenities"].values
     furnishing_params = request_body["furnishings"].class == NilClass ? [] : request_body["furnishings"].values
@@ -131,6 +111,19 @@ sql7 = "select * from properties"
       render json: {id: @property.id}
     end
   end
+  
+  # POST /properties
+  def create
+    @property = Property.new(property_params)
+    properties_posted = @property.profile.properties_posted + 1
+    @property.profile.update!(properties_posted: properties_posted)
+
+    if @property.save
+      render json: @property, status: :created, location: @property
+    else
+      render json: @property.errors, status: :unprocessable_entity
+    end
+  end
 
   # PATCH/PUT /properties/1
   def update
@@ -146,6 +139,7 @@ sql7 = "select * from properties"
     @property.destroy
   end
 
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_property
@@ -154,10 +148,9 @@ sql7 = "select * from properties"
 
     # Only allow a trusted parameter "white list" through.
     def property_params
-      puts "Ji"
       #params.require(:property).permit!
       
-      # params.fetch(:property, {})
+      params.fetch(:property, {})
     end
     
     def accept_all_params
@@ -169,7 +162,7 @@ sql7 = "select * from properties"
       bucket = 'shrivrealestate'
       
       obj = Aws::S3::Client.new(
-        credentials: Aws::Credentials.new('AKIAI4M7AU3XQ537UP2A', 'I8UMtJp2VmcXZ4jRF6W3Uhr+avhinc9ggNcPcs/B'),
+        credentials: Aws::Credentials.new('accesskey', 'secretkey'),
         region: region
       )
       
