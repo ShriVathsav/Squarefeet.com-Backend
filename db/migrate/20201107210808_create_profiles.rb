@@ -2,6 +2,7 @@ class CreateProfiles < ActiveRecord::Migration[6.0]
   def change
     create_table :profiles do |t|
       t.string "first_name"
+      t.string "password_digest"
       t.string "contact_no", default: "", null: false
       t.string "email", default: "", null: false
       t.string "last_name", default: "", null: false

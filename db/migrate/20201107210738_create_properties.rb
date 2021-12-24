@@ -2,7 +2,7 @@ class CreateProperties < ActiveRecord::Migration[6.0]
   def change
     create_table :properties do |t|
       t.string "property_type", default: "", null: false
-      t.integer "sub_property_type"
+      t.string "sub_property_type"
       t.string "poster_designation", default: "", null: false
       t.string "list_property_for", default: "", null: false
       t.string "location"
@@ -21,8 +21,8 @@ class CreateProperties < ActiveRecord::Migration[6.0]
       t.integer "bathrooms"
       t.integer "balconies"
       t.string "furnishing"
-      t.integer "total_floors"
-      t.integer "property_on_floor"
+      t.string "total_floors"
+      t.string "property_on_floor"
       t.integer "floors_allowed_for_construction"
       t.integer "number_of_flats"
       t.boolean "presence_of_elevator", default: false
@@ -66,6 +66,11 @@ class CreateProperties < ActiveRecord::Migration[6.0]
       t.string "postal_code"
       t.string "state"
       t.string "maintenance_unit"
+      t.string "photos_list"
+      t.string "amenities_list"
+      t.string "more_amenities_list"
+      t.string "other_rooms_list"
+      t.string "furnishings_list"
       t.timestamps
     end
   end
