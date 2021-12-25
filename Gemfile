@@ -13,6 +13,7 @@ gem 'puma', '~> 4.1'
 gem 'jwt'
 
 gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt-ruby', '3.1.2'
 gem 'rack-cors'
 
 gem 'aws-sdk', '~> 3'

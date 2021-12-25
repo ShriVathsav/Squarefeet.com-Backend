@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_24_061140) do
+ActiveRecord::Schema.define(version: 2020_11_07_211832) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "profiles", force: :cascade do |t|
     t.string "first_name"
+    t.string "password_digest"
     t.string "contact_no", default: "", null: false
     t.string "email", default: "", null: false
     t.string "last_name", default: "", null: false
@@ -27,7 +28,6 @@ ActiveRecord::Schema.define(version: 2021_12_24_061140) do
     t.string "designation", default: "Owner", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "password_digest"
   end
 
   create_table "properties", force: :cascade do |t|
@@ -96,14 +96,14 @@ ActiveRecord::Schema.define(version: 2021_12_24_061140) do
     t.string "postal_code"
     t.string "state"
     t.string "maintenance_unit"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.bigint "profile_id"
     t.string "photos_list"
     t.string "amenities_list"
     t.string "more_amenities_list"
     t.string "other_rooms_list"
     t.string "furnishings_list"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "profile_id"
     t.index ["profile_id"], name: "index_properties_on_profile_id"
   end
 
