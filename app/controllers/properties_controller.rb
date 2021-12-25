@@ -65,16 +65,17 @@ sql7 = "select * from properties"
     end
     
       mainQuery.paginate(page: params[:page], per_page: 5).find_each do |prop|
-      merged  = [prop.as_json, {:amenities => prop.amenities.as_json}, {:furnishings => prop.furnishings.as_json},
-                  {:other_rooms => prop.other_rooms.as_json}, {:photos => prop.photos.as_json}]
-      propertyCombined = merged.inject(&:merge)
-      props.push(propertyCombined)
-      jsonResult = {
-        props: [],
-        propertyCount: 1
-      }
-      #user.photos
-    end
+        #merged  = [prop.as_json, {:amenities => prop.amenities.as_json}, {:furnishings => prop.furnishings.as_json},
+        #           {:other_rooms => prop.other_rooms.as_json}, {:photos => prop.photos.as_json}]
+        #propertyCombined = merged.inject(&:merge)
+        #props.push(propertyCombined)
+        props.push(prop.as_json)
+        jsonResult = {
+          props: [],
+          propertyCount: 1
+        }
+        #user.photos
+      end
     #props = Property.joins("LEFT JOIN photos ON properties.id = photos.property_id")
     render json: {
         props: props,
