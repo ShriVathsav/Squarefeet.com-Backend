@@ -11,7 +11,7 @@ class PropertiesController < ApplicationController
     
     sql = "Select * from Properties WHERE city LIKE '#{city}' AND locality LIKE '#{locality}'"
     
-    sql3 = "select * from Properties inner join Amenities on amenities.property_id=Properties.id"
+    #sql3 = "select * from Properties inner join Amenities on amenities.property_id=Properties.id"
       
     sql4 = "SELECT t.*,
           (SELECT GROUP_CONCAT(s)
@@ -45,7 +45,7 @@ sql7 = "select * from properties"
     jsonResult = {}
     
     sql2 = "SELECT * FROM Properties INNER JOIN Amenities ON Amenities.property_id=Properties.id"
-    records_array = ActiveRecord::Base.connection.execute(sql3)
+    #records_array = ActiveRecord::Base.connection.execute(sql3)
     
     #propd = Property.where("city = 'Kanchipuram'").where("locality = 'Periya'")
     #propc = Property.all
